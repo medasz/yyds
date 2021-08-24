@@ -1,0 +1,17 @@
+version: "2.2"
+services:
+  es01:
+    image: "elasticsearch:7.13.4"
+    container_name: es-save-info
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      #以下目录需要本地先创建目录，并赋予771权限
+      - ./data:/usr/share/elasticsearch/data
+      - ./logs:/usr/share/elasticsearch/logs
+      - ./elasticsearch.yml:/usr/share/config/elasticsearch.yml
+    ports:
+      - 127.0.0.1:9200:9200
+      - 127.0.0.1:9300:9300
+    restart: always

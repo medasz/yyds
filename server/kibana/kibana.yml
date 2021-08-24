@@ -1,0 +1,6 @@
+server.host: "0"
+elasticsearch.hosts: [ "" ]
+monitoring.ui.container.elasticsearch.enabled: true
+i18n.locale: "zh-CN"
+elasticsearch.username: ""
+elasticsearch.password: ""

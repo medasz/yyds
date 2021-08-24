@@ -1,0 +1,88 @@
+1!0!/usr/lib/systemd/systemd --switched-root --system --deserialize 22!systemd
+2!0!!kthreadd
+4!2!!kworker/0:0H
+5!2!!kworker/u256:0
+6!2!!ksoftirqd/0
+7!2!!migration/0
+8!2!!rcu_bh
+9!2!!rcu_sched
+10!2!!lru-add-drain
+11!2!!watchdog/0
+12!2!!watchdog/1
+13!2!!migration/1
+14!2!!ksoftirqd/1
+15!2!!kworker/1:0
+16!2!!kworker/1:0H
+18!2!!kdevtmpfs
+19!2!!netns
+20!2!!khungtaskd
+21!2!!writeback
+22!2!!kintegrityd
+23!2!!bioset
+24!2!!bioset
+25!2!!bioset
+26!2!!kblockd
+27!2!!md
+28!2!!edac-poller
+29!2!!watchdogd
+35!2!!kswapd0
+36!2!!ksmd
+37!2!!khugepaged
+38!2!!crypto
+46!2!!kthrotld
+47!2!!kworker/u256:1
+48!2!!kmpath_rdacd
+49!2!!kaluad
+50!2!!kworker/0:1
+51!2!!kpsmoused
+53!2!!ipv6_addrconf
+66!2!!deferwq
+101!2!!kauditd
+241!2!!nfit
+242!2!!mpt_poll_0
+243!2!!mpt/0
+244!2!!ata_sff
+250!2!!scsi_eh_0
+253!2!!scsi_tmf_0
+254!2!!scsi_eh_1
+256!2!!scsi_tmf_1
+257!2!!scsi_eh_2
+258!2!!scsi_tmf_2
+260!2!!irq/16-vmwgfx
+262!2!!ttm_swap
+281!2!!kworker/0:1H
+287!2!!jbd2/sda2-8
+288!2!!ext4-rsv-conver
+367!1!/usr/lib/systemd/systemd-journald!systemd-journald
+400!1!/usr/lib/systemd/systemd-udevd!systemd-udevd
+428!1!/sbin/auditd!auditd
+484!2!!kworker/u257:0
+486!1!/usr/lib/polkit-1/polkitd --no-debug!polkitd
+487!2!!hci0
+489!2!!hci0
+491!2!!kworker/u257:1
+503!1!/usr/sbin/irqbalance --foreground!irqbalance
+504!1!/usr/bin/VGAuthService -s!VGAuthService
+507!1!/usr/bin/vmtoolsd!vmtoolsd
+509!1!/usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation!dbus-daemon
+523!1!/usr/sbin/chronyd!chronyd
+552!1!/usr/lib/systemd/systemd-logind!systemd-logind
+578!1!/usr/sbin/crond -n!crond
+579!2!!kworker/0:3
+597!1!/usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid!firewalld
+598!1!login -- root!login
+642!2!!kworker/1:1H
+643!1!/usr/sbin/NetworkManager --no-daemon!NetworkManager
+771!643!/sbin/dhclient -d -q -sf /usr/libexec/nm-dhcp-helper -pf /var/run/dhclient-ens33.pid -lf /var/lib/NetworkManager/dhclient-db767538-9d22-425e-804e-84c24330402b-ens33.lease -cf /var/lib/NetworkManager/dhclient-ens33.conf ens33!dhclient
+959!1!/usr/sbin/sshd -D!sshd
+960!1!/usr/bin/python2 -Es /usr/sbin/tuned -l -P!tuned
+963!1!/usr/sbin/rsyslogd -n!rsyslogd
+1326!1!/usr/libexec/postfix/master -w!master
+1334!1326!pickup -l -t unix -u!pickup
+1335!1326!qmgr -l -t unix -u!qmgr
+2450!598!-bash!bash
+7581!959!sshd: root@pts/0!sshd
+7585!7581!-bash!bash
+7622!2!!kworker/1:1
+7669!2!!kworker/1:2
+7685!7585!./test_process!test_process
