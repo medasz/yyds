@@ -4,10 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/binary"
-<<<<<<< HEAD
 	"fmt"
-=======
->>>>>>> 28a89f9c51ff1890d2c2fdbabcc30bcb5244c2ac
 	"hids/agent/comman"
 	"log"
 	"os"
@@ -78,16 +75,11 @@ func GetLastbCmd() (resData []LoginLog) {
 	outPipe, err := cmd.StdoutPipe()
 	if err != nil {
 		log.Println(err.Error())
-<<<<<<< HEAD
 		return resData
-=======
-		return
->>>>>>> 28a89f9c51ff1890d2c2fdbabcc30bcb5244c2ac
 	}
 	reg, err := regexp.Compile("\\s+")
 	if err != nil {
 		log.Println(err.Error())
-<<<<<<< HEAD
 		return resData
 	}
 	go func() {
@@ -135,48 +127,6 @@ func GetLastbCmd() (resData []LoginLog) {
 	if err != nil {
 		log.Println(err)
 		return resData
-=======
-		return
-	}
-	for true {
-		r := bufio.NewReader(outPipe)
-		line, _, err := r.ReadLine()
-		if err != nil {
-			if err.Error() == "EOF" {
-				break
-			}
-			log.Println(err.Error())
-			continue
-		}
-		line = reg.ReplaceAllLiteral(line, []byte(" "))
-
-		col := bytes.SplitN(line, []byte("-"), 2)
-		if len(col) < 2 {
-			continue
-		}
-
-		if len(col) == 2 {
-			coll := bytes.TrimSpace(col[0])
-			col3 := bytes.SplitN(coll, []byte(" "), 4)
-			localTime, err := time.LoadLocation("Asia/Shanghai")
-			tt, err := time.ParseInLocation("Mon Jan 2 15:04:05 2006", string(col3[3]), localTime)
-			if err != nil {
-				log.Println(err)
-				continue
-			}
-			if tt.Unix() > comman.LastTime {
-				m := LoginLog{}
-				m.Status = "false"
-				m.Remote = string(col3[2])
-				if m.Remote == "" {
-					continue
-				}
-				m.Username = string(col3[0])
-				m.Time = tt
-				resData = append(resData, m)
-			}
-		}
->>>>>>> 28a89f9c51ff1890d2c2fdbabcc30bcb5244c2ac
 	}
 	return resData
 }
@@ -212,15 +162,10 @@ func GetLastb() (resData []LoginLog) {
 	return resData
 }
 func GetLoginLog() (resultData []LoginLog) {
-<<<<<<< HEAD
 	fmt.Println("获取ssh成功登录历史")
 	resultData = append(resultData, GetLast()...)
 	//resultData = append(resultData, GetLastb()...)
 	fmt.Println("获取ssh失败登录历史")
-=======
-	resultData = append(resultData, GetLast()...)
-	//resultData = append(resultData, GetLastb()...)
->>>>>>> 28a89f9c51ff1890d2c2fdbabcc30bcb5244c2ac
 	resultData = append(resultData, GetLastbCmd()...)
 	return resultData
 }

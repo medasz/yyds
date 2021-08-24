@@ -2,10 +2,7 @@ package client
 
 import (
 	"encoding/json"
-<<<<<<< HEAD
 	"fmt"
-=======
->>>>>>> 28a89f9c51ff1890d2c2fdbabcc30bcb5244c2ac
 	"hids/agent/collect"
 	"hids/agent/comman"
 	"hids/agent/filter"
@@ -80,10 +77,7 @@ func (a *Agent) GetInfo() {
 func (a *Agent) SendInfo(data map[string]interface{}) {
 	url := "http://" + a.url + "/saveInfo"
 	for k, v := range data {
-<<<<<<< HEAD
 		fmt.Printf("发送数据%s\n",k)
-=======
->>>>>>> 28a89f9c51ff1890d2c2fdbabcc30bcb5244c2ac
 		tmp := make(map[string]interface{})
 		tmp[k] = v
 		dataJson, err := json.Marshal(tmp)
@@ -92,10 +86,7 @@ func (a *Agent) SendInfo(data map[string]interface{}) {
 			continue
 		}
 		comman.PostData(url, dataJson)
-<<<<<<< HEAD
 		fmt.Printf("发送数据%s结束\n",k)
-=======
->>>>>>> 28a89f9c51ff1890d2c2fdbabcc30bcb5244c2ac
 	}
 
 }
