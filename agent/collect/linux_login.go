@@ -82,52 +82,90 @@ func GetLastbCmd() (resData []LoginLog) {
 		log.Println(err.Error())
 		return resData
 	}
-	go func() {
-		r := bufio.NewReader(outPipe)
-		for true {
-			line, _, err := r.ReadLine()
-			if err != nil {
-				if err.Error() == "EOF" {
-					break
-				}
-				log.Println(err.Error())
-				continue
-			}
-			line = reg.ReplaceAllLiteral(line, []byte(" "))
-			col := bytes.SplitN(line, []byte(" "), 4)
-			if len(col) == 4 {
-				coll := bytes.SplitN(col[3], []byte(" - "), 4)
-				localTime, err := time.LoadLocation("Asia/Shanghai")
-				tt, err := time.ParseInLocation("Mon Jan 2 15:04:05 2006", string(coll[0]), localTime)
-				if err != nil {
-					log.Println(err)
-					continue
-				}
-				if tt.Unix() > comman.LastTime {
-					m := LoginLog{}
-					m.Status = "false"
-					m.Remote = string(col[2])
-					if m.Remote == "" {
-						continue
-					}
-					m.Username = string(col[0])
-					m.Time = tt
-					resData = append(resData, m)
-				}
-			}
-		}
-	}()
+	//go func() {
+	//	r := bufio.NewReader(outPipe)
+	//	for true {
+	//		line, _, err := r.ReadLine()
+	//		if err != nil {
+	//			if err.Error() == "EOF" {
+	//				break
+	//			}
+	//
+	//			log.Println(err.Error())
+	//			continue
+	//		}
+	//		line = reg.ReplaceAllLiteral(line, []byte(" "))
+	//		col := bytes.SplitN(line, []byte(" "), 4)
+	//		if len(col) == 4 {
+	//			coll := bytes.SplitN(col[3], []byte(" - "), 4)
+	//			localTime, err := time.LoadLocation("Asia/Shanghai")
+	//			tt, err := time.ParseInLocation("Mon Jan 2 15:04:05 2006", string(coll[0]), localTime)
+	//			if err != nil {
+	//				log.Println(err)
+	//				continue
+	//			}
+	//			if tt.Unix() > comman.LastTime {
+	//				m := LoginLog{}
+	//				m.Status = "false"
+	//				m.Remote = string(col[2])
+	//				if m.Remote == "" {
+	//					continue
+	//				}
+	//				m.Username = string(col[0])
+	//				m.Time = tt
+	//				resData = append(resData, m)
+	//			}
+	//		}
+	//	}
+	//}()
 	err = cmd.Start()
 	if err != nil {
 		log.Println(err)
 		return resData
 	}
-	time.Sleep(time.Minute * 2)
-	err = cmd.Wait()
-	if err != nil {
-		log.Println(err)
-		return resData
+	r := bufio.NewReader(outPipe)
+	for true {
+		line, _, err := r.ReadLine()
+		if err != nil {
+			if err.Error() == "EOF" {
+				break
+			}
+			log.Println(err.Error())
+			continue
+		}
+		line = reg.ReplaceAllLiteral(line, []byte(" "))
+		col := bytes.SplitN(line, []byte(" "), 4)
+		if len(col) == 4 {
+			coll := bytes.SplitN(col[3], []byte(" - "), 4)
+			localTime, err := time.LoadLocation("Asia/Shanghai")
+			tt, err := time.ParseInLocation("Mon Jan 2 15:04:05 2006", string(coll[0]), localTime)
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+			if tt.Unix() > comman.LastTime {
+				m := LoginLog{}
+				m.Status = "false"
+				m.Remote = string(col[2])
+				if m.Remote == "" {
+					continue
+				}
+				m.Username = string(col[0])
+				m.Time = tt
+				resData = append(resData, m)
+			}
+		}else{
+			fmt.Println("没有了")
+			fmt.Println(string(line))
+			break
+		}
 	}
+	//time.Sleep(time.Minute * 2)
+	//err = cmd.Wait()
+	//if err != nil {
+	//	log.Println(err)
+	//	return resData
+	//}
 	return resData
 }
 
